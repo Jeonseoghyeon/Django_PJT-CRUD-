@@ -4,6 +4,7 @@ from .models import Review, Comment
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 # Create your views here.
+
 def review_list(request):
     reviews=Review.objects.order_by('-id')
     context={
@@ -64,8 +65,8 @@ def review_delete(request,review_id):
         if request.user == review.user:
             review.delete()
             return redirect('community:review_list')
-        else:
-            return redirect('community:review_detail',review_id)
+        # else:
+            # return redirect('community:review_detail',review_id)
 
 
 @login_required
@@ -85,7 +86,6 @@ def comments_delete(request,review_id,comment_id):
     comment=get_object_or_404(Comment,id=comment_id)
     if request.user == comment.user:
         if request.method=='POST':
-
             comment.delete()
             return redirect('community:review_detail', review_id)
     else:
