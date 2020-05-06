@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import authenticate
-# from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+# from django.contrib.auth import get_user_model
 
 # Create your views here.
 def index(request):
@@ -36,7 +36,7 @@ def login(request):
             form = AuthenticationForm(request,request.POST) #
             if form.is_valid():
                 auth_login(request,form.get_user()) # AuthenticationForm 메서드
-                return redirect(request.GET.get('next') or 'community:review_list') # 
+                return redirect(request.GET.get('next') or 'community:review_list')
         else:
             form = AuthenticationForm()
         context={
